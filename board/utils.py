@@ -1,5 +1,5 @@
-import re
 import django
+import re
 from django.utils.text import wrap
 from django.utils.translation import ugettext, ugettext_lazy as _
 from django.contrib.sites.models import Site
@@ -77,7 +77,7 @@ def new_message_email(sender, instance, signal,
             subject = subject_prefix % {'subject': instance.subject}
             message = render_to_string(template_name, {
                 'site_url': '%s://%s' % (default_protocol, current_domain),
-                'message': instance,
+                'messagea': instance,
             })
             if instance.recipient.email != "":
                 send_mail(subject, message, settings.DEFAULT_FROM_EMAIL,

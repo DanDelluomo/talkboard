@@ -58,7 +58,7 @@ def format_subject(subject):
 
 def new_message_email(sender, instance, signal,
         subject_prefix=_(u'New Message: %(subject)s'),
-        template_name="django_messages/new_message.html",
+        template_name="board/new_message.html",
         default_protocol=None,
         *args, **kwargs):
     """

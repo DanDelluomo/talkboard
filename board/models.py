@@ -104,6 +104,6 @@ def inbox_count_for(user):
     return Message.objects.filter(recipient=user, read_at__isnull=True, recipient_deleted_at__isnull=True).count()
 
 # fallback for email notification if django-notification could not be found
-if "pinax.notifications" not in settings.INSTALLED_APPS and getattr(settings, 'DJANGO_MESSAGES_NOTIFY', True):
-    from django_messages.utils import new_message_email
+if "pinax.notifications" not in settings.INSTALLED_APPS and getattr(settings, 'board_NOTIFY', True):
+    from board.utils import new_message_email
     signals.post_save.connect(new_message_email, sender=Message)

@@ -4,3 +4,5 @@ dist
 .tox
 .DS_Store
 docs/build
+execute.py
+.env

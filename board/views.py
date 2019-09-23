@@ -15,19 +15,19 @@ except ImportError:
     from django.urls import reverse
 from django.conf import settings
 
-from django_messages.models import Message
-from django_messages.forms import ComposeForm
-from django_messages.utils import format_quote, get_user_model, get_username_field
+from board.models import Message
+from board.forms import ComposeForm
+from board.utils import format_quote, get_user_model, get_username_field
 
 User = get_user_model()
 
-if "pinax.notifications" in settings.INSTALLED_APPS and getattr(settings, 'DJANGO_MESSAGES_NOTIFY', True):
+if "pinax.notifications" in settings.INSTALLED_APPS and getattr(settings, 'board_NOTIFY', True):
     from pinax.notifications import models as notification
 else:
     notification = None
 
 @login_required
-def inbox(request, template_name='django_messages/inbox.html'):
+def inbox(request, template_name='board/inbox.html'):
     """
     Displays a list of received messages for the current user.
     Optional Arguments:
@@ -39,7 +39,7 @@ def inbox(request, template_name='django_messages/inbox.html'):
     })
 
 @login_required
-def outbox(request, template_name='django_messages/outbox.html'):
+def outbox(request, template_name='board/outbox.html'):
     """
     Displays a list of sent messages by the current user.
     Optional arguments:
@@ -51,7 +51,7 @@ def outbox(request, template_name='django_messages/outbox.html'):
     })
 
 @login_required
-def trash(request, template_name='django_messages/trash.html'):
+def trash(request, template_name='board/trash.html'):
     """
     Displays a list of deleted messages.
     Optional arguments:
@@ -66,7 +66,7 @@ def trash(request, template_name='django_messages/trash.html'):
 
 @login_required
 def compose(request, recipient=None, form_class=ComposeForm,
-        template_name='django_messages/compose.html', success_url=None,
+        template_name='board/compose.html', success_url=None,
         recipient_filter=None):
     """
     Displays and handles the ``form_class`` form to compose new messages.
@@ -107,7 +107,7 @@ def compose(request, recipient=None, form_class=ComposeForm,
 
 @login_required
 def reply(request, message_id, form_class=ComposeForm,
-        template_name='django_messages/compose.html', success_url=None,
+        template_name='board/compose.html', success_url=None,
         recipient_filter=None, quote_helper=format_quote,
         subject_template=_(u"Re: %(subject)s"),):
     """
@@ -206,7 +206,7 @@ def undelete(request, message_id, success_url=None):
 @login_required
 def view(request, message_id, form_class=ComposeForm, quote_helper=format_quote,
         subject_template=_(u"Re: %(subject)s"),
-        template_name='django_messages/view.html'):
+        template_name='board/view.html'):
     """
     Shows a single message.``message_id`` argument is required.
     The user is only allowed to see the message, if he is either
